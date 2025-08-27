@@ -1,7 +1,7 @@
 # Проект «Большое путешествие»
 
 * Студент: [Yuri Tamurkin](https://up.htmlacademy.ru/ecmascript-individual/2/user/2608607).
-* Наставник: `Неизвестно`.
+* Наставник: `Денис Лопатин`.
 
 ---
 
