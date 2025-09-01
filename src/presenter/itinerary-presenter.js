@@ -13,6 +13,6 @@ export default class ItineraryPresenter {
 
   init() {
     render(this.eventListComponent, this.container);
-    render(newPointComponent, this.container);
+    render(this.newPointComponent, this.container);
   }
 }
