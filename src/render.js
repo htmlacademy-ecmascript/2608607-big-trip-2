@@ -15,5 +15,8 @@ function createElement(template) {
 function render(component, container, place = RenderPosition.BEFOREEND) {
   container.insertAdjacentElement(place, component.getElement());
 }
+function renderBgn(component, container, place = RenderPosition.AFTERBEGIN) {
+  container.insertAdjacentElement(place, component.getElement());
+}
 
-export {RenderPosition, createElement, render};
+export { RenderPosition, createElement, render, renderBgn };
