@@ -344,7 +344,8 @@ export default class EventsListView {
 
   getElement() {
     if (!this.element) {
-      this.element = createElement(this.getTemplate());
+      this.element = createElement(this.getTemplate);
+      this.element.classList.add('trip-events__list');
     }
     return this.element;
   }
