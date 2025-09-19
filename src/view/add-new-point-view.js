@@ -1,7 +1,18 @@
 import { createElement } from '../render.js';
 
+function createNewOfferTemplate({title, price}) {
+  return (
+    `<li class="event__offer">
+      <span class="event__offer-title">${title}</span>
+      &plus;&euro;&nbsp;
+      <span class="event__offer-price">${price}</span>
+    </li>`
+  );
+}
+
 function createNewPointTemplate() {
-  return (`
+  return (
+    `<li class="trip-events__item">
     <form class="event event--edit" action="#" method="post">
       <header class="event__header">
         <div class="event__type-wrapper">
@@ -161,12 +172,18 @@ function createNewPointTemplate() {
           </div>
         </section>
       </section>
-    </form>`);
+    </form>
+    </li>`);
 }
 export default class NewPointVeiw {
+  constructor({point, offers, destination}) {
+    this.point = point;
+    this.offers = offers;
+    this.destination = destination;
+  }
 
   getTemplate() {
-    return createNewPointTemplate();
+    return createNewPointTemplate(this.point, this.offers, this.destination);
   }
 
   getElement() {
