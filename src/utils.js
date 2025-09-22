@@ -1,7 +1,8 @@
+import { TIME_FORMAT, DATE_FORMAT } from './const';
 import dayjs from 'dayjs';
-import { TIME_FORMAT } from './const';
+import duration from 'dayjs/plugin/duration';
 
-const DATE_FORMAT = 'D MMMM';
+dayjs.extend(duration);
 
 function getRandomInteger(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -31,6 +32,22 @@ function getRandomOffers(offersType) {
     .map((offer) => offer.id);
 }
 
+function getTimeDifference(dateStart, dateEnd) {
+  const timeDuration = dayjs.duration(dayjs(dateEnd).diff(dateStart));
+  const days = timeDuration.days();
+  const hours = timeDuration.hours();
+  const minutes = timeDuration.minutes();
+
+  switch (true) {
+    case days > 0:
+      return `${days}D ${hours.toString().padStart(2, '0')}H ${minutes.toString().padStart(2, '0')}M`;
+    case hours > 0:
+      return `${hours.toString().padStart(2, '0')}H ${minutes.toString().padStart(2, '0')}M`;
+    default:
+      return `${minutes}M`;
+  }
+}
+
 export {
   getRandomArrayElement,
   getRandomInteger,
@@ -38,4 +55,5 @@ export {
   getRandomOffers,
   humanizeEventDate,
   humanizeEventTime,
+  getTimeDifference,
 };

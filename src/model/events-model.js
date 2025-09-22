@@ -44,7 +44,35 @@ export default class EventsModel {
       return 'Add an event into itinerary';
     }
 
-    const destinationNames = events.map((event))
+    const destinationNames = events.map((point) => this.getDestinationsById(point.destination)?.name).filter(Boolean);
+    const uniqueNames = [...new Set(destinationNames)];
+
+    if (uniqueNames.length > 3) {
+      return`${uniqueNames[0]} - ... - ${uniqueNames[uniqueNames.length - 1]}`;
+    }
+    return uniqueNames.join(' - ');
   }
 
+  getTripDateRange() {
+    const events = this.getEvents();
+    if (events.length === 0) {
+      return '';
+    }
+    const sortedEvents = [...events].sort((a, b) => new Date(a.dateFrom) - new Date(b.dateFrom));
+    const dateStart = sortedEvents[0].dateFrom;
+    const dateEnd = sortedEvents[sortedEvents.length - 1].dateTo;
+    return `${humanizeEventDate(dateStart)} — ${humanizeEventDate(dateEnd)}`;
+  }
+
+  getTotalCost() {
+    const events = this.getEvents();
+
+    return events.reduce((total, point) => {
+      const eventCost = point.basePrice;
+      const offersForEvent = this.getOffersById(point.type, point.offers);
+      const offersCost = offersForEvent.reduce((sum, offer) => sum + offer.price, 0);
+
+      return total + eventCost + offersCost;
+    }, 0);
+  }
 }

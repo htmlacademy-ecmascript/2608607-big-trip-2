@@ -15,7 +15,26 @@ export const mockDestination = [
       src: `https://picsum.photos/248/152?random=${getRandomInteger(MIN_PHOTO_INDEX, MAX_PHOTO_INDEX)}`,
       description: getRandomArrayElement(DESCRIPTION),
     })),
+  },
+  {
+    id: uuidv4(),
+    name: getRandomArrayElement(CITIES),
+    description: createDescription(),
+    pictures: Array.from({ length: getRandomInteger(MIN_PHOTO_INDEX, MAX_PHOTO_INDEX) }, () => ({
+      src: `https://picsum.photos/248/152?random=${getRandomInteger(MIN_PHOTO_INDEX, MAX_PHOTO_INDEX)}`,
+      description: getRandomArrayElement(DESCRIPTION),
+    })),
+  },
+  {
+    id: uuidv4(),
+    name: getRandomArrayElement(CITIES),
+    description: createDescription(),
+    pictures: Array.from({ length: getRandomInteger(MIN_PHOTO_INDEX, MAX_PHOTO_INDEX) }, () => ({
+      src: `https://picsum.photos/248/152?random=${getRandomInteger(MIN_PHOTO_INDEX, MAX_PHOTO_INDEX)}`,
+      description: getRandomArrayElement(DESCRIPTION),
+    })),
   }
+
 ];
 
 export const mockOffers = [
