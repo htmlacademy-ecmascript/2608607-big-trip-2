@@ -1,18 +1,21 @@
 import { createElement } from '../render.js';
 
-function createEventsListTemplate() {
-  return '<ul class="trip-events__list"></ul>';
+function createBoardTemplate() {
+  return (`<section class="trip-events">
+    <h2 class="visually-hidden">Trip events</h2>
+    </section>`);
 }
 
-export default class EventsListView {
+export default class BoardView {
   getTemplate() {
-    return createEventsListTemplate();
+    return createBoardTemplate();
   }
 
   getElement() {
     if (!this.element) {
       this.element = createElement(this.getTemplate());
     }
+
     return this.element;
   }
 
@@ -20,4 +23,3 @@ export default class EventsListView {
     this.element = null;
   }
 }
-

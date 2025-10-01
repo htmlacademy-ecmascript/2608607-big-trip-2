@@ -1,8 +1,8 @@
 const RenderPosition = {
-  BEFOREBEGIN: 'beforebegin',
-  AFTERBEGIN: 'afterbegin',
-  BEFOREEND: 'beforeend',
-  AFTEREND: 'afterend',
+  BEFOREBEGIN: 'beforeBegin',
+  AFTERBEGIN: 'afterBegin',
+  BEFOREEND: 'beforeEnd',
+  AFTEREND: 'afterEnd',
 };
 
 function createElement(template) {
@@ -18,8 +18,12 @@ function createElement(template) {
  * @param {Element} container - The DOM element to render into.
  * @param {string} place - The position relative to the container (use RenderPosition).
  */
-function render(component, container, place) {
-  container.insertAdjacentElement(place, component.getElement());
+function render(component, container, place = 'beforeEnd') {
+  if (container && container.insertAdjacentElement) {
+    container.insertAdjacentElement(place, component.getElement());
+  } else {
+    console.error('Invalid container provided for rendering:', container);
+  }
 }
 
 export { RenderPosition, createElement, render };

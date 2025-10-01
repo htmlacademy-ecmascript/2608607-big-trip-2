@@ -1,18 +1,28 @@
-//Импортируем класс в main.js...
-import SortingView from './view/sorting-view.js';
-import TripInfoView from './view/trip-info-view.js';
+
 import FiltersView from './view/filters-view.js';
-import { render, RenderPosition } from './render.js';
 import ItineraryPresenter from './presenter/itinerary-presenter.js';
+import EventsModel from './model/events-model.js';
+import TripInfoPresenter from './presenter/Info-presenter.js';
+import { render } from './render.js';
 
+const siteHeaderElement = document.querySelector('.page-header');
+const siteTripInfoElement = siteHeaderElement.querySelector('.trip-main');
+const siteHeaderFiltersElement = siteHeaderElement.querySelector('.trip-controls');
 const siteMainElement = document.querySelector('.page-main');
-const tripEventsElement = siteMainElement.querySelector('.page-body__container .trip-events');
-const tripEventsFilters = document.querySelector('.trip-controls__filters');
-const tripInfoElement = document.querySelector('.trip-main');
-const itineraryPresenter = new ItineraryPresenter({ tripEventsList: siteMainElement });
+const siteTripEventsElement = siteMainElement.querySelector('.trip-events');
 
-render(new SortingView(), tripEventsElement, RenderPosition.BEFOREEND); // ..и передадим экземпляр класса в рендер-функцию
-render(new FiltersView(), tripEventsFilters, RenderPosition.BEFOREEND);
-render(new TripInfoView(), tripInfoElement, RenderPosition.AFTERBEGIN);
+const eventsModel = new EventsModel();
+
+const itineraryPresenter = new ItineraryPresenter({
+  boardContainer: siteTripEventsElement,
+  eventsModel});
+
+const tripInfoPresenter = new TripInfoPresenter({
+  infoContainer: siteTripInfoElement,
+  eventsModel,
+});
+
+render(new FiltersView(), siteHeaderFiltersElement);
 
 itineraryPresenter.init();
+tripInfoPresenter.init();
